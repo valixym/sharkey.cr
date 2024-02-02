@@ -11,7 +11,7 @@ module Sharkey
 
   def self.api_post(instance : String, payload : String, endpoint : String)
     endpoint = "#{instance}/api/#{endpoint}"
-    response = HTTP::Client.post(endpoint, body: payload)
+    response = HTTP::Client.post(endpoint, body: payload, headers: HTTP::Headers{"Content-Type" => "application/json"})
     return response.body
   end
 

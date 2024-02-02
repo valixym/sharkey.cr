@@ -5,11 +5,12 @@ describe Sharkey do
   # TODO: Write tests
 
   it "works" do
-    resp = Sharkey::Misc.emojis("https://kitsunes.club")
+    resp = Sharkey::Misc.stats("https://kitsunes.club")
     x = JSON.parse(resp)
 
-    emoji = x["emojis"][2525]
+    notes_count = x["originalNotesCount"].as_i
+    users_count = x["originalUsersCount"].as_i
 
-    puts "Emoji :#{emoji["name"]}: in in the category '#{emoji["category"]}' and is stored at #{emoji["url"]}"
+    puts "Instance has #{notes_count} total notes, and #{users_count} total users <3"
   end
 end

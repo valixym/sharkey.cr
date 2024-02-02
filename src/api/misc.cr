@@ -21,4 +21,12 @@ class Sharkey::Misc
     endpoint = "emojis"
     return Sharkey.api_get(instance, endpoint)
   end
+
+  # Get the server's statistics. Includes `notesCount`,`usersCount`,
+  # etc etc.
+  def self.stats(instance)
+    payload = "{}" # For whatever reason, this requires the request type to be POST, but doesn't need a payload :neofox_confused:
+    endpoint = "stats"
+    return Sharkey.api_post(instance, payload, endpoint)
+  end
 end
