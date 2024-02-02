@@ -60,4 +60,13 @@ class Sharkey::Misc
     endpoint = "stats"
     return Sharkey.api_post(instance, payload, endpoint)
   end
+
+  # Get the endpoints for an instance.
+  #
+  # Request type: `POST`
+  def self.endpoints(instance)
+    payload = "{}" # Also requires an _empty_ payload
+    endpoint = "endpoints"
+    return Sharkey.api_post(instance, payload, endpoint)
+  end
 end
