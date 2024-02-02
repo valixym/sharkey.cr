@@ -5,7 +5,7 @@ describe Sharkey do
   # TODO: Write tests
 
   it "works" do
-    resp = Sharkey::Drive.files("https://kitsunes.club", ENV["SHARKEY_API_KEY"])
+    resp = Sharkey::Drive.drive("https://kitsunes.club", ENV["SHARKEY_API_KEY"])
     puts resp
   end
 end

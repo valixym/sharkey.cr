@@ -20,4 +20,14 @@ class Sharkey::Drive
         endpoint = "drive/files"
         return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
     end
+
+    # Get information on the authenticated user's drive. Will return `capacity` and `usage` info in *bytes*. You may want to convert these to KB or MB depending on your use-case.
+    #
+    # Request type: `POST`
+    # 
+    def self.drive(instance, bearerAuth)
+        payload = "{}"
+        endpoint = "drive"
+        return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
+    end
 end
