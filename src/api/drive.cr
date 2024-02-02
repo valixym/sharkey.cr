@@ -41,11 +41,21 @@ class Sharkey::Drive
     #     return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
     # end
 
-    # Request the server to download a new drive file from a URL.
+    # Request the server to download a new drive file from a URL. Please note that, if the query is valid, it will return nothing.
+    #
+    # Request type: `POST`
     def self.files_upload_from_url(instance, bearerAuth, url, isSensitive = false, comment = "", marker = "", force = false)
         payload = {"url" => url, "isSensitive" => isSensitive, "comment" => comment, "marker" => marker, "force" => force}.to_json
         endpoint = "drive/files/upload-from-url"
-        puts payload
+        return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
+    end
+
+    # Search for a file by name. Will return all available info on the file, incl. `md5` hash, `id`, etc.
+    #
+    # Request type: `POST`
+    def self.files_find(instance, bearerAuth, name)
+        payload = {"name": name}.to_json
+        endpoint = "drive/files/find"
         return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
     end
 end
