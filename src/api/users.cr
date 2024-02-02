@@ -8,6 +8,14 @@ class Sharkey::Users
     # Get a list of a user's achievements.
     #
     # Request type: `POST`
+    # ## Example Usage of `users/achievements`
+    # ```crystal
+    # resp = Sharkey::Users.achievements("https://kitsunes.club", "9p332xwemp")
+    # x = JSON.parse(resp)
+    # u_timestamp = x[0]["unlockedAt"]
+    # puts "Valixym completed the Sharkey tutorial at #{u_timestamp}"
+    # # Ex: "Valixym completed the Sharkey tutorial at 1706860800"
+    # ```
     def self.achievements(instance, userId)
         endpoint = "users/achievements"
         payload = {"userId" => userId}.to_json

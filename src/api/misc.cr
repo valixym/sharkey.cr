@@ -48,14 +48,15 @@ class Sharkey::Misc
   # Request type: `POST` (empty payload)
   # ## Example Usage of `stats`
   # ```crystal
-  # resp = Sharkey::Users.achievements("https://kitsunes.club", "9p332xwemp")
+  # resp = Sharkey::Misc.stats("https://kitsunes.club")
   # x = JSON.parse(resp)
-  # u_timestamp = x[0]["unlockedAt"]
-  # puts "Valixym completed the Sharkey tutorial at #{u_timestamp}"
-  # Ex: "Valixym completed the Sharkey tutorial at 1706568763"
+  # notes_count = x["originalNotesCount"].as_i
+  # users_count = x["originalUsersCount"].as_i
+  # puts "Instance has #{notes_count} total notes, and #{users_count} total users <3"
+  # Ex: "Instance has 6969 total notes, and 420 total users <3"
   # ```
   def self.stats(instance)
-    payload = "{}" # For whatever reason, this requires the request type to be POST, but doesn't need a payload :neofox_confused:
+    payload = "{}" # For whatever reason, this requires the request method to be POST, but doesn't need a payload :neofox_confused:
     endpoint = "stats"
     return Sharkey.api_post(instance, payload, endpoint)
   end
