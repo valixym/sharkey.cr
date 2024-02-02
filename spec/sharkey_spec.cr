@@ -5,9 +5,7 @@ describe Sharkey do
   # TODO: Write tests
 
   it "works" do
-    resp = Sharkey::Misc.announcements("https://kitsunes.club", limit: 1)
-    x = JSON.parse(resp)
-    latest_announcement = x[0]["text"]
-    puts "The latest announcement: #{latest_announcement}"
+    resp = Sharkey::Drive.files("https://kitsunes.club", ENV["SHARKEY_API_KEY"])
+    puts resp
   end
 end
