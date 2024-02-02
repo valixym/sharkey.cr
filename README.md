@@ -1,6 +1,6 @@
-# sharkey
+# Sharkey.cr
 
-TODO: Write a description here
+**Sharkey.cr** is a Crystal library made for interacting with [Sharkey](https://joinsharkey.org/)'s API.
 
 ## Installation
 
@@ -9,18 +9,26 @@ TODO: Write a description here
    ```yaml
    dependencies:
      sharkey:
-       github: valixym/sharkey
+       github: valixym/sharkey.cr
    ```
 
 2. Run `shards install`
 
 ## Usage
 
+Using Sharkey.cr is fairly straightforward. All of the responses from Sharkey's API are formatted in JSON, and can be easily parsed using Crystal's built-in JSON library. I wrote some example code that you can base your project off of.
+
 ```crystal
 require "sharkey"
-```
 
-TODO: Write usage instructions here
+resp = Sharkey::Misc.stats("https://kitsunes.club")
+x = JSON.parse(resp)
+
+notes_count = x["originalNotesCount"].as_i
+users_count = x["originalUsersCount"].as_i
+
+puts "Instance has #{notes_count} total notes, and #{users_count} total users <3"
+```
 
 ## Development
 
