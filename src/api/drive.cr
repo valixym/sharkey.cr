@@ -30,4 +30,22 @@ class Sharkey::Drive
         endpoint = "drive"
         return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
     end
+
+    # For whatever reason, this code doesn't want to work. I'm keeping it here if I want to fix it later, though.
+
+    # def self.files_create(instance, bearerAuth, file, name = "", comment = "", isSensitive = false, force = false)
+    #     payload = {"name" => name, "comment" => comment, "isSensitive" => isSensitive, "force" => force, "file" => file}.to_json
+    #     endpoint = "drive/files/create"
+    #     puts payload
+    #     puts endpoint
+    #     return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
+    # end
+
+    # Request the server to download a new drive file from a URL.
+    def self.files_upload_from_url(instance, bearerAuth, url, isSensitive = false, comment = "", marker = "", force = false)
+        payload = {"url" => url, "isSensitive" => isSensitive, "comment" => comment, "marker" => marker, "force" => force}.to_json
+        endpoint = "drive/files/upload-from-url"
+        puts payload
+        return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
+    end
 end
