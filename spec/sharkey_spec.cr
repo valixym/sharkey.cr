@@ -5,12 +5,10 @@ describe Sharkey do
   # TODO: Write tests
 
   it "works" do
-    resp = Sharkey::Misc.stats("https://kitsunes.club")
+    resp = Sharkey::Users.achievements("https://kitsunes.club", "9p332xwemp")
     x = JSON.parse(resp)
+    u_timestamp = x[0]["unlockedAt"]
 
-    notes_count = x["originalNotesCount"].as_i
-    users_count = x["originalUsersCount"].as_i
-
-    puts "Instance has #{notes_count} total notes, and #{users_count} total users <3"
+    puts "Valixym completed the Sharkey tutorial at #{u_timestamp}"
   end
 end

@@ -20,6 +20,7 @@ Using Sharkey.cr is fairly straightforward. All of the responses from Sharkey's 
 
 ```crystal
 require "sharkey"
+require "json"
 
 resp = Sharkey::Misc.stats("https://kitsunes.club")
 x = JSON.parse(resp)
