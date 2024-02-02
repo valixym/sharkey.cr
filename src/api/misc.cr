@@ -69,4 +69,20 @@ class Sharkey::Misc
     endpoint = "endpoints"
     return Sharkey.api_post(instance, payload, endpoint)
   end
+
+  # Get the announcements from an instance.
+  #
+  # Request type: `POST`
+  # ## Example Usage for `announcements`
+  # ```crystal
+  # resp = Sharkey::Misc.announcements("https://kitsunes.club", limit: 1)
+  # x = JSON.parse(resp)
+  # latest_announcement = x[0]["text"]
+  # puts "The latest announcement: #{latest_announcement}" 
+  # ```
+  def self.announcements(instance, limit = 10, isActive = true)
+    payload = {"limit" => limit, "isActive" => isActive}.to_json
+    endpoint = "announcements"
+    return Sharkey.api_post(instance, payload, endpoint)
+  end
 end
