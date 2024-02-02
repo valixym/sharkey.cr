@@ -1,0 +1,9 @@
+name: sharkey
+version: 0.1.0
+
+authors:
+  - v <v@valixym.net>
+
+crystal: '>= 1.10.1'
+
+license: MIT
