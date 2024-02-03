@@ -2,6 +2,7 @@ require "http/client"
 require "./api/users"
 require "./api/misc"
 require "./api/drive"
+require "./api/notes"
 require "json"
 
 # The `Sharkey` class is primarily for the library itself, and it
