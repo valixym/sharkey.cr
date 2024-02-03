@@ -5,13 +5,12 @@ require "json"
 # designated section. For example, `get-online-users-count`
 # doesn't belong to a category, so it would be placed here.
 class Sharkey::Misc
-
   # Get the number of users currently online.
   #
   # Request type: `GET`
   #
   # ## Example Usage of `get_online_users_count`
-  # ```crystal
+  # ```
   # resp = Sharkey::Misc.get_online_users_count("https://kitsunes.club")
   # x = JSON.parse(resp)
   # users_online = x["count"].as_i
@@ -30,7 +29,7 @@ class Sharkey::Misc
   # Request type: `GET`
   #
   # ## Example Usage of `emojis`
-  # ```crystal
+  # ```
   # resp = Sharkey::Misc.emojis("https://kitsunes.club")
   # x = JSON.parse(resp)
   # emoji = x["emojis"][2525]
@@ -47,7 +46,7 @@ class Sharkey::Misc
   #
   # Request type: `POST` (empty payload)
   # ## Example Usage of `stats`
-  # ```crystal
+  # ```
   # resp = Sharkey::Misc.stats("https://kitsunes.club")
   # x = JSON.parse(resp)
   # notes_count = x["originalNotesCount"].as_i
@@ -74,11 +73,11 @@ class Sharkey::Misc
   #
   # Request type: `POST`
   # ## Example Usage for `announcements`
-  # ```crystal
+  # ```
   # resp = Sharkey::Misc.announcements("https://kitsunes.club", limit: 1)
   # x = JSON.parse(resp)
   # latest_announcement = x[0]["text"]
-  # puts "The latest announcement: #{latest_announcement}" 
+  # puts "The latest announcement: #{latest_announcement}"
   # ```
   def self.announcements(instance, limit = 10, isActive = true)
     payload = {"limit" => limit, "isActive" => isActive}.to_json
