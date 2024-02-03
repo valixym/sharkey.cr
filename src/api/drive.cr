@@ -58,4 +58,12 @@ class Sharkey::Drive
         endpoint = "drive/files/find"
         return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
     end
+
+    # Search for a file by its MD5 hash. The hash can be found through using `files/find`, as it will return the hash that way. For whatever reason, it doesn't show in the Sharkey UI.
+    def self.files_find_by_hash(instance, bearerAuth, md5)
+        payload = {"md5": "#{md5}"}.to_json
+        endpoint = "drive/files/find-by-hash"
+        puts payload
+        return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
+    end
 end
