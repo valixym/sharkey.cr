@@ -53,17 +53,22 @@ class Sharkey::Drive
     # Search for a file by name. Will return all available info on the file, incl. `md5` hash, `id`, etc.
     #
     # Request type: `POST`
-    def self.files_find(instance, bearerAuth, name)
-        payload = {"name": name}.to_json
+    def self.files_find(instance, bearerAuth, name, folderId = nil)
+        payload = {"name" => name}
+
+        unless folderId.nil?
+            payload["folderId"] = folderId
+        end
+        puts payload
         endpoint = "drive/files/find"
-        return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
+        return Sharkey.api_auth_post(instance, payload.to_json, endpoint, bearerAuth)
     end
 
     # Search for a file by its MD5 hash. The hash can be found through using `files/find`, as it will return the hash that way. For whatever reason, it doesn't show in the Sharkey UI.
     # 
     # Request type: `POST`
     def self.files_find_by_hash(instance, bearerAuth, md5)
-        payload = {"md5": "#{md5}"}.to_json
+        payload = {"md5" => "#{md5}"}.to_json
         endpoint = "drive/files/find-by-hash"
         return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
     end
@@ -71,8 +76,8 @@ class Sharkey::Drive
     # Create a folder on the user's drive. The default name is "Untitled", if one isn't provided. Optionally, you can set a parent folder by giving it the `misskey:id`, but it defaults to root which is usually good.
     # 
     # Request type: `POST`
-    def self.files_folders_create(instance, bearerAuth, name = "Untitled", parentId = nil)
-        payload = {"name": name, "parentId": parentId}.to_json
+    def self.folders_create(instance, bearerAuth, name = "Untitled", parentId = nil)
+        payload = {"name" => name, "parentId" => parentId}.to_json
         endpoint = "drive/folders/create"
         return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
     end
