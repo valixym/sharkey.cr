@@ -5,7 +5,7 @@ describe Sharkey do
   # TODO: Write tests
 
   it "works" do
-    resp = Sharkey::Drive.files_find("https://kitsunes.club", ENV["SHARKEY_API_KEY"], "valixym.png", folderId: "9pa68u9ttb")
+    resp = Sharkey::Notes.hybrid_timeline("https://kitsunes.club", ENV["SHARKEY_API_KEY"], withReplies: true, limit: 1)
     puts resp
   end
 end
