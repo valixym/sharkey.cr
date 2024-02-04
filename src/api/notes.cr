@@ -3,6 +3,7 @@ require "json"
 
 # This handles most everything related to notes, such as local/hybrid/global feeds, creating/deleting notes, etc.
 class Sharkey::Notes
+  # Shows the 'hybrid timeline', which, I believe, is the API's version of the "Social" timeline in the Sharkey UI, but I can't be sure.
   def self.hybrid_timeline(instance, bearerAuth, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil, allowPartial = false, includeMyRenotes = true, includeRenotedMyNotes = true, includeLocalRenotes = true, withFiles = false, withRenotes = true, withReplies = false, withBots = true)
     payload = {"limit" => limit, "allowPartial" => allowPartial, "includeMyRenotes" => includeMyRenotes, "includeRenotedMyNotes" => includeRenotedMyNotes, "includeLocalRenotes" => includeLocalRenotes, "withFiles" => withFiles, "withRenotes" => withRenotes, "withReplies" => withReplies, "withBots" => withBots}
 
@@ -26,26 +27,27 @@ class Sharkey::Notes
     return Sharkey.api_auth_post(instance, payload.to_json, endpoint, bearerAuth)
   end
 
+  #   Shows the local timeline. Basically, the timeline including all the servers that the instance federates with.
   def self.global_timeline(instance, bearerAuth, withFiles = false, withBots = true, withRenotes = true, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil)
     payload = {
       "withFiles" => withFiles,
-      "withBots" => withBots
+      "withBots"  => withBots,
     }
 
     unless sinceId.nil?
-        payload["sinceId"] = sinceId
+      payload["sinceId"] = sinceId
     end
 
     unless untilId.nil?
-        payload["untilId"] = untilId
+      payload["untilId"] = untilId
     end
 
     unless sinceDate.nil?
-        payload["sinceDate"] = sinceDate
+      payload["sinceDate"] = sinceDate
     end
 
     unless untilDate.nil?
-        payload["untilDate"] = untilDate
+      payload["untilDate"] = untilDate
     end
 
     endpoint = "notes/global-timeline"
