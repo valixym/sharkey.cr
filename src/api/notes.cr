@@ -53,4 +53,28 @@ class Sharkey::Notes
     endpoint = "notes/global-timeline"
     return Sharkey.api_auth_post(instance, payload.to_json, endpoint, bearerAuth)
   end
+
+  # I'm not entirely sure what this does
+  def self.bubble_timeline(instance, bearerAuth, withFiles = false, withBots = true, withRenotes = true, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil)
+    payload = {"withFiles" => withFiles, "withBots" => withBots, "withRenotes" => withRenotes, "limit" => limit}
+
+    unless sinceId.nil?
+      payload["sinceId"] = sinceId
+    end
+
+    unless untilId.nil?
+      payload["untilId"] = untilId
+    end
+
+    unless sinceDate.nil?
+      payload["sinceDate"] = sinceDate
+    end
+
+    unless untilDate.nil?
+      payload["untilDate"] = untilDate
+    end
+
+    endpoint = "notes/bubble-timeline"
+    return Sharkey.api_auth_post(instance, payload.to_json, endpoint, bearerAuth)
+  end
 end
