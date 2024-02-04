@@ -27,7 +27,7 @@ class Sharkey::Notes
     return Sharkey.api_auth_post(instance, payload.to_json, endpoint, bearerAuth)
   end
 
-  #   Shows the local timeline. Basically, the timeline including all the servers that the instance federates with.
+  #   Shows the local timeline. Basically, the timeline including all the servers that the instance federates with. NOTE: does not require `bearerAuth`.
   def self.global_timeline(instance, withFiles = false, withBots = true, withRenotes = true, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil)
     payload = {
       "withFiles" => withFiles,
@@ -54,7 +54,7 @@ class Sharkey::Notes
     return Sharkey.api_post(instance, payload.to_json, endpoint)
   end
 
-  # I'm not entirely sure what this does
+  # I'm not entirely sure what this does. NOTE: does not require `bearerAuth`.
   def self.bubble_timeline(instance, withFiles = false, withBots = true, withRenotes = true, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil)
     payload = {"withFiles" => withFiles, "withBots" => withBots, "withRenotes" => withRenotes, "limit" => limit}
 
@@ -79,5 +79,33 @@ class Sharkey::Notes
   end
 
   # Display timeline of the local instance. NOTE: does not require `bearerAuth`.
-  # def self.local_timeline(instance, )
+  def self.local_timeline(instance, withFiles = false, withRenotes = true, withReplies = false, withBots = true, limit = 10, sinceId = nil, untilId = nil, allowPartial = false, sinceDate = nil, untilDate = nil)
+    payload = {
+      "withFiles"    => withFiles,
+      "withRenotes"  => withRenotes,
+      "withReplies"  => withReplies,
+      "withBots"     => withBots,
+      "limit"        => limit,
+      "allowPartial" => allowPartial,
+    }
+
+    unless sinceId.nil?
+      payload["sinceId"] = sinceId
+    end
+
+    unless untilId.nil?
+      payload["untilId"] = untilId
+    end
+
+    unless sinceDate.nil?
+      payload["sinceDate"] = sinceDate
+    end
+
+    unless untilDate.nil?
+      payload["untilDate"] = untilDate
+    end
+
+    endpoint = "notes/local-timeline"
+    return Sharkey.api_post(instance, payload.to_json, endpoint)
+  end
 end
