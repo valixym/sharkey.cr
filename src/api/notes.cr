@@ -28,7 +28,7 @@ class Sharkey::Notes
   end
 
   #   Shows the local timeline. Basically, the timeline including all the servers that the instance federates with.
-  def self.global_timeline(instance, bearerAuth, withFiles = false, withBots = true, withRenotes = true, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil)
+  def self.global_timeline(instance, withFiles = false, withBots = true, withRenotes = true, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil)
     payload = {
       "withFiles" => withFiles,
       "withBots"  => withBots,
@@ -51,11 +51,11 @@ class Sharkey::Notes
     end
 
     endpoint = "notes/global-timeline"
-    return Sharkey.api_auth_post(instance, payload.to_json, endpoint, bearerAuth)
+    return Sharkey.api_post(instance, payload.to_json, endpoint)
   end
 
   # I'm not entirely sure what this does
-  def self.bubble_timeline(instance, bearerAuth, withFiles = false, withBots = true, withRenotes = true, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil)
+  def self.bubble_timeline(instance, withFiles = false, withBots = true, withRenotes = true, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil)
     payload = {"withFiles" => withFiles, "withBots" => withBots, "withRenotes" => withRenotes, "limit" => limit}
 
     unless sinceId.nil?
@@ -75,6 +75,9 @@ class Sharkey::Notes
     end
 
     endpoint = "notes/bubble-timeline"
-    return Sharkey.api_auth_post(instance, payload.to_json, endpoint, bearerAuth)
+    return Sharkey.api_post(instance, payload.to_json, endpoint)
   end
+
+  # Display timeline of the local instance. NOTE: does not require `bearerAuth`.
+  # def self.local_timeline(instance, )
 end
