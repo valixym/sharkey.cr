@@ -5,7 +5,7 @@ describe Sharkey do
   # TODO: Write tests
 
   it "works" do
-    resp = Sharkey::Notes.local_timeline("https://kitsunes.club", limit: 1, withFiles: true)
-    puts resp
+    resp = Sharkey::Username.available("https://kitsunes.club", "v")
+    puts resp # returns `false`
   end
 end
