@@ -18,7 +18,10 @@ class Sharkey::Users
   # ```
   def self.achievements(instance, userId)
     endpoint = "users/achievements"
-    payload = {"userId" => userId}.to_json
+    payload = {
+      "userId" => userId,
+    }.to_json
+
     return Sharkey.api_post(instance, payload, endpoint)
   end
 end

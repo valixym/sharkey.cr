@@ -5,7 +5,17 @@ require "json"
 class Sharkey::Notes
   # Shows the 'hybrid timeline', which, I believe, is the API's version of the "Social" timeline in the Sharkey UI, but I can't be sure.
   def self.hybrid_timeline(instance, bearerAuth, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil, allowPartial = false, includeMyRenotes = true, includeRenotedMyNotes = true, includeLocalRenotes = true, withFiles = false, withRenotes = true, withReplies = false, withBots = true)
-    payload = {"limit" => limit, "allowPartial" => allowPartial, "includeMyRenotes" => includeMyRenotes, "includeRenotedMyNotes" => includeRenotedMyNotes, "includeLocalRenotes" => includeLocalRenotes, "withFiles" => withFiles, "withRenotes" => withRenotes, "withReplies" => withReplies, "withBots" => withBots}
+    payload = {
+      "limit"                 => limit,
+      "allowPartial"          => allowPartial,
+      "includeMyRenotes"      => includeMyRenotes,
+      "includeRenotedMyNotes" => includeRenotedMyNotes,
+      "includeLocalRenotes"   => includeLocalRenotes,
+      "withFiles"             => withFiles,
+      "withRenotes"           => withRenotes,
+      "withReplies"           => withReplies,
+      "withBots"              => withBots,
+    }
 
     unless sinceId.nil?
       payload["sinceId"] = sinceId
@@ -56,7 +66,12 @@ class Sharkey::Notes
 
   # I'm not entirely sure what this does. NOTE: does not require `bearerAuth`.
   def self.bubble_timeline(instance, withFiles = false, withBots = true, withRenotes = true, limit = 10, sinceId = nil, untilId = nil, sinceDate = nil, untilDate = nil)
-    payload = {"withFiles" => withFiles, "withBots" => withBots, "withRenotes" => withRenotes, "limit" => limit}
+    payload = {
+      "withFiles"   => withFiles,
+      "withBots"    => withBots,
+      "withRenotes" => withRenotes,
+      "limit"       => limit,
+    }
 
     unless sinceId.nil?
       payload["sinceId"] = sinceId

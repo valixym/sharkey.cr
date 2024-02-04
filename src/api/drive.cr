@@ -45,7 +45,14 @@ class Sharkey::Drive
   #
   # Request type: `POST`
   def self.files_upload_from_url(instance, bearerAuth, url, isSensitive = false, comment = "", marker = "", force = false)
-    payload = {"url" => url, "isSensitive" => isSensitive, "comment" => comment, "marker" => marker, "force" => force}.to_json
+    payload = {
+      "url"         => url,
+      "isSensitive" => isSensitive,
+      "comment"     => comment,
+      "marker"      => marker,
+      "force"       => force,
+    }.to_json
+
     endpoint = "drive/files/upload-from-url"
     return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
   end
@@ -54,7 +61,9 @@ class Sharkey::Drive
   #
   # Request type: `POST`
   def self.files_find(instance, bearerAuth, name, folderId = nil)
-    payload = {"name" => name}
+    payload = {
+      "name" => name,
+    }
 
     unless folderId.nil?
       payload["folderId"] = folderId
@@ -68,7 +77,10 @@ class Sharkey::Drive
   #
   # Request type: `POST`
   def self.files_find_by_hash(instance, bearerAuth, md5)
-    payload = {"md5" => "#{md5}"}.to_json
+    payload = {
+      "md5" => "#{md5}",
+    }.to_json
+
     endpoint = "drive/files/find-by-hash"
     return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
   end
@@ -77,7 +89,11 @@ class Sharkey::Drive
   #
   # Request type: `POST`
   def self.folders_create(instance, bearerAuth, name = "Untitled", parentId = nil)
-    payload = {"name" => name, "parentId" => parentId}.to_json
+    payload = {
+      "name"     => name,
+      "parentId" => parentId,
+    }.to_json
+
     endpoint = "drive/folders/create"
     return Sharkey.api_auth_post(instance, payload, endpoint, bearerAuth)
   end

@@ -80,7 +80,11 @@ class Sharkey::Misc
   # puts "The latest announcement: #{latest_announcement}"
   # ```
   def self.announcements(instance, limit = 10, isActive = true)
-    payload = {"limit" => limit, "isActive" => isActive}.to_json
+    payload = {
+      "limit"    => limit,
+      "isActive" => isActive,
+    }.to_json
+
     endpoint = "announcements"
     return Sharkey.api_post(instance, payload, endpoint)
   end
